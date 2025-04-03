@@ -1,6 +1,9 @@
+import "../Styles/PokemonInfo.scss";
+
+
 const PokemonInfo = ({pokemon}) => {
     return (
-        <div>
+        <div className = "pokemon-info">
             <h1>
                 {pokemon.name.toUpperCase()}
             </h1>

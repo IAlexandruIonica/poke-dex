@@ -1,0 +1,33 @@
+@import "./variables";
+
+.pokemon-list {
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-gap: 10px;
+    padding: 20px;
+    list-style: none;
+    text-align: center;
+
+    li {
+        text-decoration: none;
+        background: white;
+        color: $text-color;
+        padding: 15px;
+        border-radius: $border-radius;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: 0.3s;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        
+
+        &:hover {
+            background: $primary-color;
+            color: white;
+            transform: scale(1.05);
+        }
+    }
+}
