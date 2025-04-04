@@ -5,7 +5,7 @@ const Home = () =>{
     return(
         <div>
             <h1 className = "center-div">
-                Welcome to the Palworld App
+                Welcome to the Pokedex App
             </h1>
             <PokemonList />
         </div>

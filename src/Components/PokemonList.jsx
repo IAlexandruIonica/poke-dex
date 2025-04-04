@@ -6,26 +6,48 @@ import "../Styles/PokemonList.scss";
 
 const PokemonList = () => {
   const [pokemonList, setPokemonList] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredPokemon, setFilteredPokemon] = useState([]);
   const navigate = useNavigate();
 
-  console.log(pokemonList);
 
   useEffect(() => {
     axios
       .get("https://pokeapi.co/api/v2/pokemon?limit=20")
       .then((response) => {
-        setPokemonList(response.data.results.map((pokemon) => {
-           return {...pokemon, id:pokemon.url.split("/")[6]}
-        }));
+        const pokemonData = response.data.results.map((pokemon) => {
+            return { ...pokemon, id: pokemon.url.split("/")[6] };
+          });
+          setPokemonList(pokemonData);
+        setFilteredPokemon(pokemonData);
       })
       .catch((error) => console.error("Error fetching Pokemon List:", error));
   }, []);
 
+  const handleSearch = () => {
+    const filtered = pokemonList.filter((pokemon) =>
+      pokemon.name.toLowerCase().startsWith(searchTerm.toLowerCase())
+    );
+    setFilteredPokemon(filtered);
+  };
+
   return (
     <div>
       <h1 className="center-div">Pokemon List</h1>
+
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Search Pokemon..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-bar"
+        />
+        <button onClick = {handleSearch} className="search-button">Search</button>
+      </div>
+
       <ul className="pokemon-list">
-        {pokemonList.map((pokemon, index) => (
+        {filteredPokemon.map((pokemon, index) => (
           <li
             key={index}
             className="pokemon-list"
