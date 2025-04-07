@@ -26,3 +26,38 @@
         margin: 10px 0;
     }
 }
+
+
+.back-button { 
+    display: flex;
+    justify-content: center;
+    flex-direction:row;
+    align-items: center;
+    padding: 12px 20px;
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    width: 250px;
+  
+    &:hover {
+     background: $primary-color;
+     color: $text-color;
+    }
+  
+    &:active {
+      background-color: #d9442e;
+      transform: scale(0.98); 
+    }
+  }
+
+  .pokemon-info-page {
+    display: flex;
+    justify-content: center;
+    flex-direction:column;
+    align-items: center;
+
+  }
