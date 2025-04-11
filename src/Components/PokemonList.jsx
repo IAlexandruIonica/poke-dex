@@ -28,10 +28,14 @@ const PokemonList = () => {
   }, [pageOffset]);
 
   const handleSearch = () => {
-    const filtered = pokemonList.filter((pokemon) =>
-      pokemon.name.toLowerCase().startsWith(searchTerm.toLowerCase())
-    );
-    setFilteredPokemon(filtered);
+    if (searchTerm.trim() === "") {
+      setFilteredPokemon(pokemonList);
+    } else {
+      const filtered = pokemonList.filter((pokemon) =>
+        pokemon.name.toLowerCase().startsWith(searchTerm.toLowerCase())
+      );
+      setFilteredPokemon(filtered);
+    }
   };
 
   const handleNextPage = () => {
@@ -45,7 +49,6 @@ const PokemonList = () => {
   return (
     <div>
       <h1 className="center-div">Pokemon List</h1>
-
       <div className="search-container">
         <input
           type="text"
@@ -58,7 +61,6 @@ const PokemonList = () => {
           Search
         </button>
       </div>
-
       <ul className="pokemon-list">
         {filteredPokemon.map((pokemon, index) => (
           <li
@@ -74,12 +76,14 @@ const PokemonList = () => {
           </li>
         ))}
       </ul>
-      <div className="pagination-controls">
-        <button onClick={handlePrevPage} disabled={pageOffset === 0}>
-          &larr; Prev
-        </button>
-        <button onClick={handleNextPage}>Next &rarr;</button>
-      </div>
+      {filteredPokemon === pokemonList && (
+        <div className="pagination-controls">
+          <button onClick={handlePrevPage} disabled={pageOffset === 0}>
+            &larr; Prev
+          </button>
+          <button onClick={handleNextPage}>Next &rarr;</button>
+        </div>
+      )}
     </div>
   );
 };
