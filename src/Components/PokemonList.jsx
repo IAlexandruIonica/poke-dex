@@ -8,27 +8,38 @@ const PokemonList = () => {
   const [pokemonList, setPokemonList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredPokemon, setFilteredPokemon] = useState([]);
+  const [pageOffset, setPageOffset] = useState(0);
   const navigate = useNavigate();
-
+  const limit = 22;
 
   useEffect(() => {
     axios
-      .get("https://pokeapi.co/api/v2/pokemon?limit=20")
+      .get(
+        `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${pageOffset}`
+      )
       .then((response) => {
         const pokemonData = response.data.results.map((pokemon) => {
-            return { ...pokemon, id: pokemon.url.split("/")[6] };
-          });
-          setPokemonList(pokemonData);
+          return { ...pokemon, id: pokemon.url.split("/")[6] };
+        });
+        setPokemonList(pokemonData);
         setFilteredPokemon(pokemonData);
       })
       .catch((error) => console.error("Error fetching Pokemon List:", error));
-  }, []);
+  }, [pageOffset]);
 
   const handleSearch = () => {
     const filtered = pokemonList.filter((pokemon) =>
       pokemon.name.toLowerCase().startsWith(searchTerm.toLowerCase())
     );
     setFilteredPokemon(filtered);
+  };
+
+  const handleNextPage = () => {
+    setPageOffset((prevOffset) => prevOffset + limit);
+  };
+
+  const handlePrevPage = () => {
+    setPageOffset((prevOffset) => Math.max(0, prevOffset - limit));
   };
 
   return (
@@ -43,7 +54,9 @@ const PokemonList = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           className="search-bar"
         />
-        <button onClick = {handleSearch} className="search-button">Search</button>
+        <button onClick={handleSearch} className="search-button">
+          Search
+        </button>
       </div>
 
       <ul className="pokemon-list">
@@ -61,7 +74,14 @@ const PokemonList = () => {
           </li>
         ))}
       </ul>
+      <div className="pagination-controls">
+        <button onClick={handlePrevPage} disabled={pageOffset === 0}>
+          &larr; Prev
+        </button>
+        <button onClick={handleNextPage}>Next &rarr;</button>
+      </div>
     </div>
   );
 };
+
 export default PokemonList;

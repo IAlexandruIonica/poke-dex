@@ -85,4 +85,36 @@
     }
   }
   
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+  
+    button {
+      padding: 10px 20px;
+      background-color: #ff6347;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+  
+      &:hover:not(:disabled) {
+        background: variables.$primary-color;
+      }
+  
+      &:active:not(:disabled) {
+        background-color: #d9442e;
+        transform: scale(0.98); 
+      }
+    }
+  }
+  
 
