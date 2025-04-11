@@ -1,4 +1,5 @@
-@import "./variables";
+@use "./variables";
+
 @keyframes gradientShift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -9,24 +10,25 @@ body {
   background: radial-gradient(circle, #0072ff, #00c6ff); 
   background-size: 300% 300%;
   animation: gradientShift 8s ease infinite;
-  color: $text-color;
+  color: variables.$text-color;
   margin: 0;
   padding: 0;
 }
-  
-  .container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  }
 
-  .center-div {
-    display: flex;
-    justify-content: center;
-    flex-direction:row;
-    align-items: center;
-  }
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.center-div {
+  display: flex;
+  justify-content: center;
+  flex-direction:row;
+  align-items: center;
+  text-align: center;
+}
 
  
   

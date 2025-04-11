@@ -1,9 +1,9 @@
-@import "./variables";
+@use "./variables";
 
 .pokemon-info {
     text-align: center;
     padding: 20px;
-    border-radius: $border-radius;
+    border-radius: variables.$border-radius;
     background: white;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     max-width: 400px;
@@ -11,7 +11,7 @@
     padding: 30px;
 
     h1 {
-        color: $secondary-color;
+        color: variables.$secondary-color;
         font-size: 24px;
     }
 
@@ -44,8 +44,8 @@
     width: 250px;
   
     &:hover {
-     background: $primary-color;
-     color: $text-color;
+     background: variables.$primary-color;
+     color: variables.$text-color;
     }
   
     &:active {
